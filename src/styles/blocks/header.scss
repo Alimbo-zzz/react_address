@@ -1,0 +1,27 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1em;
+	height: 100%;
+	width: 100%;
+	@include boxPadding;
+	user-select: none;
+
+
+
+	&__box {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+
+		span {
+			font-weight: 600;
+			font-size: 20px;
+		}
+
+		svg {
+			font-size: 40px;
+		}
+	}
+}

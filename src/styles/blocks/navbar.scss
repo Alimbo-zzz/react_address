@@ -1,0 +1,131 @@
+.nav {
+	@include boxPadding;
+
+	&__title {
+		margin-bottom: 20px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		padding: 0.5em 0;
+		user-select: none;
+		cursor: pointer;
+		transition: 0.2s;
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			width: 5px;
+			background: $decor-1;
+			border-radius: 10px;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			transition: 0.3s;
+			opacity: 0;
+		}
+
+		&[data-active='true'] {
+			pointer-events: none;
+
+			&::before {
+				opacity: 1;
+			}
+		}
+
+
+
+		svg {
+			font-size: 30px;
+		}
+
+		p {
+			font-weight: 600;
+			font-size: 20px;
+			line-height: 1.2;
+
+			&:hover {
+				color: $decor-1;
+			}
+		}
+	}
+}
+
+
+
+.select {
+	position: relative;
+
+	&__preview {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		margin-bottom: 0em;
+		position: relative;
+		transition: 0.2s;
+
+		&[data-open='true'] {
+			margin-bottom: 1em;
+
+			&::before {
+				transform: translateY(-50%) scaleY(1);
+			}
+		}
+
+		&::before {
+			font-size: 8px;
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 1em;
+			width: 0;
+			height: 0;
+			border-left: 1em solid transparent;
+			border-right: 1em solid transparent;
+			border-bottom: 1.6em solid #A8A8A8;
+			transition: 0.3s;
+			transform: translateY(-50%) scaleY(-1);
+		}
+	}
+
+	&__list {
+		padding-left: 30px;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		transition: 0.3s;
+
+		overflow: hidden;
+		pointer-events: none;
+		max-height: 0px;
+
+		&[data-open="true"] {
+			pointer-events: auto;
+			max-height: 200px;
+		}
+	}
+
+
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+
+		svg {
+			font-size: 35px;
+		}
+	}
+}

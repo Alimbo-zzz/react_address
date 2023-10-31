@@ -1,0 +1,29 @@
+.news-page {
+	height: 100%;
+	@include boxPadding;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+
+
+	&__content {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		overflow-y: auto;
+		padding-right: 3em;
+
+		span {
+			font: inherit;
+		}
+
+		a {
+			display: inline-block;
+			color: $decor-1;
+			font-weight: 500;
+			text-decoration: underline;
+		}
+	}
+}
