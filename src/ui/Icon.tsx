@@ -3,12 +3,14 @@ interface FooProp {
 	className?: string;
 }
 
+import sprite from '../assets/sprite.svg';
+
 
 function Icon(props: FooProp) {
 
 	return (<>
 		<svg className={props?.className}>
-			<use xlinkHref={`/sprite.svg#${props.icon}`}></use>
+			<use xlinkHref={`${sprite}#${props.icon}`}></use>
 		</svg>
 	</>)
 }
