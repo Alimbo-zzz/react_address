@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import News from './News';
 import Search from './Search';
-import { Header, NavBar } from '@/components';
+import { Header, NavBar } from '../components';
 
 
 function App() {

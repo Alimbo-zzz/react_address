@@ -1,38 +1,51 @@
 import { useState } from 'react';
-import { Icon } from "@/ui";
+import { Icon } from "../ui";
 import { useLocation, useNavigate } from 'react-router-dom';
 
+interface navElement {
+	icon: string;
+	text: string;
+	route: string | null;
+	list: { icon: string, text: string }[];
+};
 
-const navList = [
+
+const navList: navElement[] = [
 	{
 		icon: "home",
 		text: "Главная",
-		route: "/"
+		route: "/",
+		list: []
 	},
 	{
 		icon: "search",
 		text: "Поиск адресов",
-		route: "/search"
+		route: "/search",
+		list: []
 	},
 	{
 		icon: "table",
 		text: "Таблицы",
-		route: null
+		route: null,
+		list: []
 	},
 	{
 		icon: "date",
 		text: "Календарь",
-		route: null
+		route: null,
+		list: []
 	},
 	{
 		icon: "mark",
 		text: "Карты",
-		route: null
+		route: null,
+		list: []
 	},
 	{
 		icon: "tv",
 		text: "Виджеты",
-		route: null
+		route: null,
+		list: []
 	},
 	{
 		icon: "settings",
@@ -46,22 +59,17 @@ const navList = [
 	{
 		icon: "out",
 		text: "Выход",
-		route: null
+		route: null,
+		list: []
 	},
 
 ];
 
 
 
-function SelectItem(params: any) {
-	const { text, icon, list } = params.data;
+function SelectItem(props: navElement) {
+	const { text, icon, list } = props;
 	const [isOpen, setOpen] = useState(false);
-
-
-	const clickPreview = (e: object) => {
-		console.log(e);
-
-	}
 
 	return (<>
 		<div className="select">
@@ -72,8 +80,8 @@ function SelectItem(params: any) {
 			<ul data-open={isOpen} className="select__list">
 				{list.map((el, i) =>
 					<li key={i} className="select__item">
-						<Icon icon={el?.icon} />
-						<p>{el?.text}</p>
+						<Icon icon={el.icon} />
+						<p>{el.text}</p>
 					</li>
 				)}
 			</ul>
@@ -86,7 +94,7 @@ function NavBar() {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const goPage = (e: string) => e && navigate(e);
+	const goPage = (e: any) => e && navigate(e);
 
 
 	return (<>
@@ -96,12 +104,13 @@ function NavBar() {
 				{navList.map((el, i) =>
 					<li key={i} className="nav__item" onClick={() => goPage(el.route)} data-active={location.pathname === el.route}>
 						{
-							!el.list ?
+							el.list.length > 0
+								? <SelectItem {...el} />
+								:
 								<>
 									<Icon icon={el?.icon} />
 									<p>{el?.text}</p>
 								</>
-								: <SelectItem data={el} />
 						}
 					</li>
 				)}

@@ -1,9 +1,18 @@
-import { Icon } from "@/ui";
+import { Icon } from "../ui";
 import { useState } from "react";
+
+
+interface Respone {
+	suggestions: {
+		unrestricted_value: string,
+		value: string
+	}[],
+};
+
 
 function Search() {
 	const [inputValue, setInputValue] = useState('');
-	const [address, setAddress] = useState([]);
+	const [address, setAddress] = useState<string[]>([]);
 
 	const sendRequest = async (e: any) => {
 		e.preventDefault();
@@ -12,7 +21,7 @@ function Search() {
 		var token = "844fd3828c54c1f682889d6fe1c3e0490bc0194b";
 		var query = inputValue;
 
-		var options = {
+		var options: object = {
 			method: "POST",
 			mode: "cors",
 			headers: {
@@ -25,9 +34,8 @@ function Search() {
 
 		fetch(url, options)
 			.then(response => response.json())
-			.then(res => {
-				console.log(res)
-				let result = res?.suggestions?.map(el => (`${el.unrestricted_value}`));
+			.then((res: Respone) => {
+				let result: Array<string> = res.suggestions.map(el => (`${el.unrestricted_value}`));
 
 				setAddress(result);
 			})
